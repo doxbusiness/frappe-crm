@@ -7,27 +7,31 @@ on:
   pull_request:
     branches:
       - main
-  schedule:
-    - cron: '0 0 * * *' # Runs daily at midnight UTC
+  workflow_dispatch: # Allows manual triggering from the GitHub Actions tab
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Check out the repository
       - name: Check out repository
         uses: actions/checkout@v2
 
-      - name: Set up Node.js # Example for Node.js projects
+      # Step 2: Set up Node.js (example environment; modify for other languages)
+      - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: '14' # Specify your Node.js version here
 
+      # Step 3: Install dependencies
       - name: Install dependencies
-        run: npm install
+        run: npm install # Replace this with `yarn install` or another command if needed
 
+      # Step 4: Build the project
       - name: Run build
-        run: npm run build
+        run: npm run build # Change this command as needed
 
+      # Step 5: Run tests
       - name: Run tests
-        run: npm test
+        run: npm test # Replace with appropriate test command if needed
